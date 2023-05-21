@@ -28,7 +28,7 @@ export default function Fit(props) {
 
     return (
         <div
-        className={`mr-2 p-1 relative cursor-pointer hover:bg-slate-200 rounded-md`}
+        className={`w-[70px] mr-2 p-1 relative cursor-pointer hover:bg-slate-200 rounded-md`}
         onClick={() =>
           toggle ? setToggle(false) : setToggle(true)
         }
@@ -45,7 +45,7 @@ export default function Fit(props) {
         {toggle && (
           <div
             onMouseLeave={() => setToggle(false)}
-            className="w-[70px]  bg-white rounded-sm py-2 font-[500] text-center absolute shadow-2xl"
+            className="w-[70px]  bg-white rounded-sm py-2 font-[500] text-center absolute shadow-2xl left-0"
           >
             {FitData.map(({ text, font }, index) => (
               <p

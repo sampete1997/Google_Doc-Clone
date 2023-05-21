@@ -22,7 +22,7 @@ const NormalText = (props) => {
   }
     return(
         <div
-        className={`mx-2 p-1 relative cursor-pointer hover:bg-slate-200 rounded-md`}
+        className={`w-[120px] mx-2 p-1 relative cursor-pointer hover:bg-slate-200 rounded-md`}
         onClick={() =>
           toggle ? setToggle(false) : setToggle(true)
         }
@@ -39,7 +39,7 @@ const NormalText = (props) => {
         {toggle && (
           <div
             onMouseLeave={() => setToggle(false)}
-            className="w-[200px]  bg-white rounded-sm font-[500] text-center absolute shadow-2xl"
+            className="w-[200px]  bg-white rounded-sm font-[500] text-center absolute shadow-2xl left-0"
           >
             {normalText.map(({ text, font }, index) => (
               <p

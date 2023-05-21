@@ -13,6 +13,8 @@ const CustomDrawer = (props) => {
         </p>
       </div>
 
+      <div>
+
       <div className="mx-2 px-2 flex items-center rounded-lg shadow-md shadow-slate-200 border-[1px] border-neutral-300 my-2">
         <SearchIcon
           className="mx-2"
@@ -33,7 +35,7 @@ const CustomDrawer = (props) => {
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
-
+</div>
 
     </div>
   );

@@ -3,7 +3,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { useState } from "react";
 
 export const moreFonts = [
-    { text: "Arial text", font: "14px" },
+    { text: "Arial", font: "14px" },
     { text: "sans", font: "14px" },
     { text: "cursive", font: "14px" },
     { text: "Geogia", font: "15px" },
@@ -14,7 +14,7 @@ export const moreFonts = [
 const MoreFonts = (props) => {
 
   const [toggle, setToggle] = useState(false)
-  const [label, setlabel] = useState('Arial text')
+  const [label, setlabel] = useState('Arial')
 
 
   const handleSelect = (text) =>{
@@ -24,7 +24,7 @@ const MoreFonts = (props) => {
 
     return(
         <div
-        className={`mx-2 p-1 relative cursor-pointer hover:bg-slate-200 rounded-md`}
+        className={`w-[80px]  mx-2 p-1 relative cursor-pointer hover:bg-slate-200 rounded-md`}
         onClick={() =>
           toggle ? setToggle(false) : setToggle(true)
         }
@@ -42,7 +42,7 @@ const MoreFonts = (props) => {
           <div
             onMouseLeave={() => setToggle(false)
             }
-            className="w-[200px] py-2 bg-white rounded-sm font-[500] text-center absolute shadow-2xl"
+            className="w-[200px] py-2 bg-white rounded-sm font-[500] text-center absolute shadow-2xl right-0"
           >
             {moreFonts.map(({ text, font }, index) => (
               <p

@@ -1,16 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
-let C = `This text is really long and the height of its container is only 100
-pixels. Therefore, a scrollbar is added to help the reader to scroll
-the content. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-sed content. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+let C = `Once upon a time there was a component that wanted to pass information down to its grandchildren, and any subsequent children in the application hierarchy. This worked well until the family started getting really big and the parent component noticed that many of the children were nearly identical and only needed slightly different information to be passed down through props.
 
-This text is really long and the height of its container is only 100
-pixels. Therefore, a scrollbar is added to help the reader to scroll
-the content. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-sed content. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna`;
+The most basic implementation of props is to define props in the parent component and pass it down to the next child component in the hierarchy, and then pass the value again through props in the child component, and then again through the grandchild — which is repeated as needed until the passed value arrives in the target component. The process is tedious, error prone, and also makes the code less flexible.`;
 
 
 const TextEditor = () => {
@@ -19,7 +11,7 @@ const TextEditor = () => {
   const [page, setPage] = useState([{ pageNo: 0, content: C }]);
   const [content, setContent] = useState(C);
   const [store , setStore] = useState(content)
-  let contentChangingCount = 0 
+
   
   useEffect(() => {
     const height = pageRef.current.scrollHeight;
@@ -54,7 +46,7 @@ const TextEditor = () => {
     // }
   };
   return (
-    <div ref={toralPagesRef} onScroll={handleScroll} className="overflow-y-scroll text-center border border-1 border-[#C7C7C7] w-full border-r-0 p-4 ">
+    <div ref={toralPagesRef} onScroll={handleScroll} className="overflow-y-scroll text-center border border-1 border-[#C7C7C7] w-full border-r-0 px-4 py-2 ">
       <div className="w-[856px] inline-block ">
         {page.map((ele) => {
           return (
