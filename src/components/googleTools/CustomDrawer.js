@@ -1,42 +1,59 @@
 import CloseIcon from "@mui/icons-material/Close";
-import SearchIcon from "@mui/icons-material/Search";
+import CircularProgress from "@mui/material/CircularProgress";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { useEffect, useState } from "react";
+import { BlackTooltip } from "../../CustomCss/customCss";
 
 const CustomDrawer = (props) => {
-  const { componentToRender, handleDrawer } = props;
+  const { handleDrawer, title, componentToRender, linkTo } = props;
+  const [loading, setLoading] = useState(true);
+
+  const handleNewTab = (link) => {
+    window.open(link, "_blank")
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
   return (
-    <div className="w-[400px] h-full bg-white py-5 shadow-md  ml-2 overflow-y-scroll">
-      <div className="flex justify-between items-center mx-3 text-[#707579]">
-        <p className="text-[14px]">Maps</p>
+    <div className="w-[400px] h-full bg-white py-5 shadow-md  ml-2 overflow-y-scroll relative">
+      {loading ? (
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          {" "}
+          <CircularProgress />
+        </div>
+      ) : (
+        <div>
+          <div className="flex justify-between items-center mx-3 text-[#707579]">
+            <p className="text-[14px]">{title || ""}</p>
+            <div className="flex justify-between items-center  w-[20%] ">
+              <div className="cursor-pointer" onClick={()=>handleNewTab("https://www.google.com/maps/place/Bengaluru,+Karnataka/@12.9537893,77.3005824,10z/data=!3m1!4b1!4m6!3m5!1s0x3bae1670c9b44e6d:0xf8dfc3e8517e4fe0!8m2!3d12.9715987!4d77.5945627!16zL20vMDljMTc")}>
+                <BlackTooltip title={"Open In New Tab"}>
+                  <OpenInNewIcon
+                    style={{ fontSize: "20px", color: "#707579" }}
+                  />
+                </BlackTooltip>
+              </div>
+              <div className="cursor-pointer" onClick={() => handleDrawer()}>
+                <BlackTooltip title={"Close"}>
+                  <CloseIcon style={{ fontSize: "20px", color: "#707579" }} />
+                </BlackTooltip>
+              </div>
+            </div>
+          </div>
 
-        <p onClick={() => handleDrawer()}>
-          <CloseIcon style={{ fontSize: "22px", color: "#707579" }} />
-        </p>
-      </div>
-
-      <div>
-
-      <div className="mx-2 px-2 flex items-center rounded-lg shadow-md shadow-slate-200 border-[1px] border-neutral-300 my-2">
-        <SearchIcon
-          className="mx-2"
-          style={{ fontSize: "24px", color: "#707579" }}
-        />
-        <input
-          type="text"
-          placeholder="Search Google Maps"
-          className="outline-none ml-2 text-sm my-2 w-full bg-white"
-        ></input>
-      </div>
-
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497700.1123279414!2d77.3012672515727!3d12.953790199640332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1684662241920!5m2!1sen!2sin"
-        width="300"
-        height="350"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-</div>
-
+          <div>{componentToRender || ""}</div>
+        </div>
+      )}
     </div>
   );
 };

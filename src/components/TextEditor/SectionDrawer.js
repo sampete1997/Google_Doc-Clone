@@ -5,7 +5,6 @@ type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 const toggleDrawer =
 () => (event) => {
-  //to avoid form failed To submit,delayed modal to close
     if (
       event.type === `keydown` &&
       ((event).key === `Tab` ||

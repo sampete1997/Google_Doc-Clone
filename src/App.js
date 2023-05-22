@@ -2,13 +2,19 @@ import "./App.css";
 import TextEditor from "./components/TextEditor/index.js";
 import TopBarWrapper from "./components/TopBarWrapper";
 import FormatTools from "./components/formatTools/FormatTools";
-import GoogleTools from "./components/googleTools";
-import CustomDrawer from "./components/googleTools/CustomDrawer";
+import GoogleTools from "./components/GoogleTools";
+import CustomDrawer from "./components/GoogleTools/CustomDrawer";
 import { useState } from "react";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState(false);
+  const [componentToRender, setComponentToRender] = useState(<div />);
   const handleDrawer = () => setIsOpen(!isOpen);
+  const getGoogleToolComponent = (component) => {
+    setComponentToRender(component);
+  };
+  const getTitle = (title) => setTitle(title)
 
   return (
     <div className="App">
@@ -21,9 +27,19 @@ function App() {
         <TextEditor />
       </div>
 
-      <GoogleTools handleDrawer={handleDrawer} />
+      <GoogleTools
+        getGoogleToolComponent={getGoogleToolComponent}
+        getTitle={getTitle}
+        handleDrawer={handleDrawer}
+      />
 
-      {isOpen && <CustomDrawer handleDrawer={handleDrawer} />}
+      {isOpen && (
+        <CustomDrawer
+          componentToRender={componentToRender}
+          handleDrawer={handleDrawer}
+          title={title}
+        />
+      )}
     </div>
   );
 }
