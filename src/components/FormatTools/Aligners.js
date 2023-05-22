@@ -1,10 +1,9 @@
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
-import FormatUnderlinedSharpIcon from "@mui/icons-material/FormatUnderlinedSharp";
 import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const iconStyle = { color: "#47484A", fontSize: "19px" };
 const wrapperStyle =
@@ -46,10 +45,9 @@ const Aligners = () => {
             className="flex items-center  mx-2 absolute bg-[#EDF2FA] border border-1 left-0"
           >
             {components.map((component) => {
-                console.log(selectedComp == component);
               return (
                 <div
-                  className={`${wrapperStyle} bg-[${selectedComp == component ? `rgb(211, 226, 253)` : ""}]`}
+                  className={wrapperStyle} 
                   onClick={() => handleSelect(component)}
                 >
                   {component}

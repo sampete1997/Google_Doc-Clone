@@ -1,20 +1,20 @@
 import "./App.css";
 import TextEditor from "./components/TextEditor/index.js";
 import TopBarWrapper from "./components/TopBarWrapper";
-import FormatTools from "./components/formatTools/FormatTools";
+import FormatTools from "./components/FormatTools/FormatTools";
 import GoogleTools from "./components/GoogleTools";
 import CustomDrawer from "./components/GoogleTools/CustomDrawer";
 import { useState } from "react";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [title, setTitle] = useState(false);
+  const [titleAndUrl, setTitleAndUrl] = useState({title: " ", linkTo: "#"});
   const [componentToRender, setComponentToRender] = useState(<div />);
-  const handleDrawer = () => setIsOpen(!isOpen);
+  const handleDrawer = (flag) => setIsOpen(flag);
   const getGoogleToolComponent = (component) => {
     setComponentToRender(component);
   };
-  const getTitle = (title) => setTitle(title)
+  const getTitleAndUrl = ({title,linkTo="https://myaccount.google.com/xyz"}) => setTitleAndUrl({title,linkTo})
 
   return (
     <div className="App">
@@ -29,7 +29,7 @@ function App() {
 
       <GoogleTools
         getGoogleToolComponent={getGoogleToolComponent}
-        getTitle={getTitle}
+        getTitleAndUrl={getTitleAndUrl}
         handleDrawer={handleDrawer}
       />
 
@@ -37,7 +37,7 @@ function App() {
         <CustomDrawer
           componentToRender={componentToRender}
           handleDrawer={handleDrawer}
-          title={title}
+          titleAndUrl={titleAndUrl}
         />
       )}
     </div>

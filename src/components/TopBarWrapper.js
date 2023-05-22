@@ -4,12 +4,16 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import VideoCameraBackOutlinedIcon from "@mui/icons-material/VideoCameraBackOutlined";
 import HistoryIcon from "@mui/icons-material/History";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Modal from "@mui/material/Modal";
-import ShareModalContent from "./ShareModalContent";
+import PublicIcon from "@mui/icons-material/Public";
+import ShareModalContent, { options } from "./ShareModalContent";
+import { ShareDocContext } from "./GlobalContext/DocShareContext";
+import { openLinkNewTab } from "./GoogleTools";
 
 const TopBarWrapper = () => {
   const [toggle, setToggle] = useState(false);
+  const {accessValue} = useContext(ShareDocContext)
 
   const handleShareModal = () => {
     setToggle(!toggle);
@@ -30,18 +34,23 @@ const TopBarWrapper = () => {
         </div>
       </div>
 
-      <div className="flex justify-around items-center w-[300px] truncate">
-        <HistoryIcon style={{ fontSize: "25px", color: "#444746" }} />
-        <CommentOutlinedIcon style={{ fontSize: "25px", color: "#444746" }} />
-        <VideoCameraBackOutlinedIcon
+      <div className="flex justify-around items-center w-[300px] truncate cursor-pointer">
+
+       <div className="hover:bg-slate-200 rounded-full p-2"><HistoryIcon style={{ fontSize: "25px", color: "#444746" }} /></div>
+
+        <div className="hover:bg-slate-200 rounded-full p-2"><CommentOutlinedIcon style={{ fontSize: "25px", color: "#444746" }} /></div>
+
+        <div onClick={()=>openLinkNewTab("https://meet.google.com/")} className="hover:bg-slate-200 rounded-full px-5 py-2">   <VideoCameraBackOutlinedIcon
           style={{ fontSize: "25px", color: "#444746" }}
         />
-
+</div>
         <div
           onClick={handleShareModal}
           className="cursor-pointer shadow hover:shadow-slate-800 w-[105px] px-1 py-2.5 bg-[#C1E7FE] rounded-full   flex font-[500] text-[14px] items-center justify-center"
         >
-          <LockOutlinedIcon style={{ fontSize: "18px" }} />
+          {accessValue === options[0].text ? <LockOutlinedIcon style={{ fontSize: "18px" }} /> : <PublicIcon
+                style={{ fontSize: "18px", backgroundColor: "#C3EED0" }}
+              />}
           <p className="pl-2 text-sm">Share</p>
         </div>
       </div>

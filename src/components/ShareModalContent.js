@@ -5,10 +5,11 @@ import ProfilePic from "./GoogleTools/Profile";
 import CustomDropDown from "./CustomDropDown";
 import PublicIcon from "@mui/icons-material/Public";
 import LinkIcon from "@mui/icons-material/Link";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShareDocContext } from "./GlobalContext/DocShareContext";
 
-const options = [{ text: "Restricted" }, { text: "Anyone with link" }];
-const roleOption = [
+export const options = [{ text: "Restricted" }, { text: "Anyone with link" }];
+export const roleOption = [
   { text: "Viewer" },
   { text: "Commenter" },
   { text: "Editor" },
@@ -35,9 +36,10 @@ export default function ShareModalContent(props) {
   const [selectedRoleValue, setSelectedRoleValue] = useState(
     roleOption[0].text
   );
-
+const {docTitle, setAccessOption, accessValue} = useContext(ShareDocContext)
   const getSelectedValue = (value) => {
     setSelectedValue(value);
+    setAccessOption(value)
   };
 
   const getSelectedRoleValue = (value) => {
@@ -56,7 +58,7 @@ export default function ShareModalContent(props) {
       <div>
         <div className="flex justify-between items-center">
           <p className="text-[22px] font-[350] text-gray-700">
-            Share "document"
+            Share {docTitle || "Untitlted document"}
           </p>
           <div className="flex w-[60px] justify-between">
             <HelpOutlineIcon style={{ fontSize: "20px" }} />
@@ -90,12 +92,12 @@ export default function ShareModalContent(props) {
         <div className="flex items-center">
           <div
             className={`p-2 ${
-              selectedValue === options[0].text
+              accessValue === options[0].text
                 ? `bg-[#E3E3E3]`
                 : `bg-[#C3EED0]`
             } rounded-full w-9 h-9 flex justify-center items-center mr-3`}
           >
-            {selectedValue === options[0].text ? (
+            {accessValue === options[0].text ? (
               <LockOutlinedIcon style={{ fontSize: "18px" }} />
             ) : (
               <PublicIcon
@@ -107,7 +109,7 @@ export default function ShareModalContent(props) {
           <div>
             <CustomDropDown
               options={options}
-              defaultValue={options[0].text}
+              defaultValue={accessValue}
               onSelectOption={getSelectedValue}
               labelSize={"14px"}
               sx={"text-[16px]"}
@@ -118,7 +120,7 @@ export default function ShareModalContent(props) {
             </p>
           </div>
         </div>
-        {selectedValue === options[1].text && (
+        {accessValue === options[1].text && (
           <CustomDropDown
             options={roleOption}
             defaultValue={roleOption[0].text}

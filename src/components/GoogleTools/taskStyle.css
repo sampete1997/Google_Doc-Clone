@@ -1,0 +1,18 @@
+.taskLogo {
+  background-image: url("https://www.gstatic.com/tasks/empty-state-room-200.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 200px 200px;
+  height: 200px;
+  width: 200px;
+  margin-bottom: 24px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.taskLogoWrapper {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}

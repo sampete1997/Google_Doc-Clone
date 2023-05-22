@@ -3,9 +3,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useEffect, useState } from "react";
 import { BlackTooltip } from "../../CustomCss/customCss";
+import { Divider } from "@mui/material";
 
 const CustomDrawer = (props) => {
-  const { handleDrawer, title, componentToRender, linkTo } = props;
+  const { handleDrawer, componentToRender, titleAndUrl } = props;
   const [loading, setLoading] = useState(true);
 
   const handleNewTab = (link) => {
@@ -15,10 +16,10 @@ const CustomDrawer = (props) => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 800);
   }, []);
   return (
-    <div className="w-[400px] h-full bg-white py-5 shadow-md  ml-2 overflow-y-scroll relative">
+    <div className="w-[400px] h-full bg-white py-5  shadow-gray-500 shadow-md  ml-2 overflow-y-scroll relative">
       {loading ? (
         <div
           style={{
@@ -33,23 +34,25 @@ const CustomDrawer = (props) => {
         </div>
       ) : (
         <div>
-          <div className="flex justify-between items-center mx-3 text-[#707579]">
-            <p className="text-[14px]">{title || ""}</p>
+          <div className="flex justify-between items-center mx-3 text-[#707579] mb-5">
+            <p className="text-[14px]">{titleAndUrl.title || ""}</p>
             <div className="flex justify-between items-center  w-[20%] ">
-              <div className="cursor-pointer" onClick={()=>handleNewTab("https://www.google.com/maps/place/Bengaluru,+Karnataka/@12.9537893,77.3005824,10z/data=!3m1!4b1!4m6!3m5!1s0x3bae1670c9b44e6d:0xf8dfc3e8517e4fe0!8m2!3d12.9715987!4d77.5945627!16zL20vMDljMTc")}>
+              <div className="cursor-pointer" onClick={()=>handleNewTab(titleAndUrl.linkTo || "https://myaccount.google.com/xyz")}>
                 <BlackTooltip title={"Open In New Tab"}>
                   <OpenInNewIcon
                     style={{ fontSize: "20px", color: "#707579" }}
                   />
                 </BlackTooltip>
               </div>
-              <div className="cursor-pointer" onClick={() => handleDrawer()}>
+              <div className="cursor-pointer" onClick={() => handleDrawer(false)}>
                 <BlackTooltip title={"Close"}>
                   <CloseIcon style={{ fontSize: "20px", color: "#707579" }} />
                 </BlackTooltip>
               </div>
             </div>
           </div>
+
+          <Divider/>
 
           <div>{componentToRender || ""}</div>
         </div>

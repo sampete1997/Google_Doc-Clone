@@ -1,26 +1,26 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { ShareDocContext } from "../GlobalContext/DocShareContext";
 
 const TitleBar = () => {
   const [titleText, setTitleText] = useState("Untitled document");
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
-  console.log("state", titleText);
+
+  const {setTitle} = useContext(ShareDocContext)
+
   const handleChange = (e) => {
-    console.log("e.target.value", e);
     setTitleText(e.target.value);
   };
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.style.width = `${inputRef.current.scrollWidth}px`;
     }
-
   }, [titleText]);
   const handleBlur = (e) => {
-    console.log("blue", e.target.value === "");
     if (e.target.value === "") {
-      console.log("dddd", e.target.value);
       setTitleText("Untitled document");
     }
+    setTimeout(()=>setTitle(titleText),200)
   };
   const handleFocus = () => {
     setIsFocused(true);
@@ -35,7 +35,7 @@ const TitleBar = () => {
         value={titleText}
         readOnly={!isFocused}
         onChange={handleChange}
-        className="px-2 border border-1 border-transparent rounded-md hover:border-gray-700 bg-transparent focus::bg-white"
+        className="w-[200px] outline-blue-600 px-3 border border-1 border-transparent rounded-md hover:border-gray-700 bg-transparent focus::bg-white"
       ></input>
     </div>
   );

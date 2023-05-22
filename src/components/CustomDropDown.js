@@ -43,7 +43,7 @@ const CustomDropDown = (props) => {
       {toggle && (
         <div
           onMouseLeave={() => setToggle(false)}
-          className={`w-[100px]  bg-white rounded-sm py-2 font-[500] text-center absolute shadow-2xl ${
+          className={`w-[100px]  bg-white rounded-sm py-2 font-[400] text-center absolute shadow-2xl ${
             className || ""
           }`}
         >
